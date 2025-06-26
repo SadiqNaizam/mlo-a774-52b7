@@ -110,12 +110,8 @@ const ClientManagement = () => {
       setClients(clients.map(c => c.id === editingClient.id ? { ...editingClient, ...data } : c));
     } else {
       // Add new client
-      const maxId = clients.reduce((max, client) => {
-        const idNum = parseInt(client.id.replace('CLI-', ''), 10);
-        return idNum > max ? idNum : max;
-      }, 0);
       const newClient: Client = {
-        id: `CLI-${String(maxId + 1).padStart(3, '0')}`,
+        id: `CLI-${String(clients.length + 1).padStart(3, '0')}`,
         status: 'active',
         ...data,
       };
@@ -131,7 +127,7 @@ const ClientManagement = () => {
       <CollapsibleSidebar />
       <div className="flex flex-col flex-1">
         <Header />
-        <main className="flex-1 p-4 md:p-6">
+        <main className="flex-1 p-4 sm:px-6 gap-4">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between">
               <div>
@@ -187,7 +183,7 @@ const ClientManagement = () => {
                         name="email"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Email</FormLabel>
+                            <FormLabel>Email</Label>
                             <FormControl>
                               <Input placeholder="e.g., contact@example.com" {...field} />
                             </FormControl>
@@ -239,9 +235,7 @@ const ClientManagement = () => {
                       <TableCell className="hidden md:table-cell">{client.contactPerson}</TableCell>
                       <TableCell className="hidden md:table-cell">{client.email}</TableCell>
                       <TableCell>
-                        <Badge variant={client.status === 'active' ? 'default' : 'secondary'}>
-                          {client.status}
-                        </Badge>
+                        <Badge variant={client.status === 'active' ? 'default' : 'secondary'}>\n                          {client.status}\n                        </Badge>
                       </TableCell>
                       <TableCell>
                         <DropdownMenu>
@@ -253,17 +247,13 @@ const ClientManagement = () => {
                           </DropdownMenuTrigger>
                           <DropdownMenuContent align="end">
                             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                            <DropdownMenuItem onSelect={() => handleEdit(client)}>
-                               <Pencil className="mr-2 h-4 w-4" /> Edit
-                            </DropdownMenuItem>
-                            <DropdownMenuItem onSelect={() => handleDelete(client.id)} className="text-red-600">
-                               <Trash2 className="mr-2 h-4 w-4" /> Delete
-                            </DropdownMenuItem>
+                            <DropdownMenuItem onSelect={() => handleEdit(client)}>\n                               <Pencil className="mr-2 h-4 w-4" /> Edit\n                            </DropdownMenuItem>
+                            <DropdownMenuItem onSelect={() => handleDelete(client.id)} className="text-red-600">\n                               <Trash2 className="mr-2 h-4 w-4" /> Delete\n                            </DropdownMenuItem>
                           </DropdownMenuContent>
                         </DropdownMenu>
                       </TableCell>
                     </TableRow>
-                  ))}\
+                  ))}
                 </TableBody>
               </Table>
             </CardContent>
