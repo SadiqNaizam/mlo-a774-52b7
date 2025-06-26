@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge';
+import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from '@/components/ui/scroll-area';
 import KanbanCard from '@/components/KanbanCard'; // Assuming this component exists
 import { toast } from "sonner";
@@ -117,12 +117,7 @@ const KanbanBoard: React.FC = () => {
                         onDragStart={(e) => handleDragStart(e, item, columnId)}
                         className="cursor-grab active:cursor-grabbing"
                       >
-                        <KanbanCard
-                          title={item.title}
-                          clientName={item.clientName}
-                          value={item.value}
-                          dueDate={item.dueDate}
-                        />
+                        <KanbanCard rfp={item} />
                       </div>
                     ))}
                     {column.items.length === 0 && (
