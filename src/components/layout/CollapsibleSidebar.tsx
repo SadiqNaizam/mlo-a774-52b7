@@ -40,7 +40,7 @@ const CollapsibleSidebar: React.FC = () => {
             <div className="flex h-16 items-center px-4 lg:px-6 border-b">
                  <Link to="/" className="flex items-center gap-2 font-semibold">
                     <Layers className="h-6 w-6" />
-                    {!isCollapsed && <span className="transition-opacity duration-300">RFP Dashboard</span>}
+                    {!isCollapsed && <span className="transition-opacity duration-300">RFP Dashboard Elite</span>}
                 </Link>
             </div>
             <TooltipProvider delayDuration={0}>
