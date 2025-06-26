@@ -110,8 +110,12 @@ const ClientManagement = () => {
       setClients(clients.map(c => c.id === editingClient.id ? { ...editingClient, ...data } : c));
     } else {
       // Add new client
+      const maxId = clients.reduce((max, client) => {
+        const idNum = parseInt(client.id.replace('CLI-', ''), 10);
+        return idNum > max ? idNum : max;
+      }, 0);
       const newClient: Client = {
-        id: `CLI-${String(clients.length + 1).padStart(3, '0')}`,
+        id: `CLI-${String(maxId + 1).padStart(3, '0')}`,
         status: 'active',
         ...data,
       };
@@ -125,9 +129,9 @@ const ClientManagement = () => {
   return (
     <div className="flex min-h-screen w-full bg-muted/40">
       <CollapsibleSidebar />
-      <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14 flex-1">
+      <div className="flex flex-col flex-1">
         <Header />
-        <main className="flex-1 p-4 sm:px-6 gap-4">
+        <main className="flex-1 p-4 md:p-6">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between">
               <div>
@@ -259,7 +263,7 @@ const ClientManagement = () => {
                         </DropdownMenu>
                       </TableCell>
                     </TableRow>
-                  ))}
+                  ))}\
                 </TableBody>
               </Table>
             </CardContent>
